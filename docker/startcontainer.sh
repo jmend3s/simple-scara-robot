@@ -14,7 +14,6 @@ CONTAINER_NAME="scara"
 IMAGE_NAME="scara-jazzy-dev"
 WORKSPACE_DIR="$PWD/scara_ws"
 
-# Check if container is already running
 if [ "$(docker ps -q -f name=^/${CONTAINER_NAME}$)" ]; then
     echo "Container ${CONTAINER_NAME} is already running."
 else
@@ -34,17 +33,11 @@ fi
 # Wait a moment for the container to initialize
 sleep 1
 
-# Open Terminator with a bash session in the container
-terminator -e "docker exec -it $CONTAINER_NAME bash" &
-sleep 0.25
-
-# Use xdotool to source ROS workspace in first split
 xdotool key ctrl+shift+e
 sleep 0.1
 xdotool type "docker exec -it $CONTAINER_NAME bash -c 'source /opt/ros/jazzy/setup.bash; [ -f /scara_ws/install/setup.bash ] && source /scara_ws/install/setup.bash; exec bash'"
 xdotool key Return
 
-# Use xdotool to source ROS workspace in second split
 xdotool key ctrl+shift+o
 sleep 0.1
 xdotool type "docker exec -it $CONTAINER_NAME bash -c 'source /opt/ros/jazzy/setup.bash; [ -f /scara_ws/install/setup.bash ] && source /scara_ws/install/setup.bash; exec bash'"
