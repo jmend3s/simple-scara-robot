@@ -30,7 +30,7 @@ else
         bash -c "/entrypoint.sh"
 fi
 
-# Wait a moment for the container to initialize
+# Wait for the container to initialize
 sleep 1
 
 xdotool key ctrl+shift+e
