@@ -4,8 +4,18 @@
   <xacro:arg name="is_ignition" default="true"/>
 
   <xacro:include filename="$(find scara_description)/urdf/scara_gazebo.xacro"/>
+  <xacro:include filename="$(find scara_description)/urdf/scara_ros2_control.xacro"/>
+
+  <!-- variables -->
+  <xacro:property name="PI" value="3.14159265359"/>
+  <xacro:property name="effort" value="30.0"/>
+  <xacro:property name="velocity" value="10.0"/>
 
   <link name="base_link"/>
+
+  <gazebo reference="base_link">
+    <static>true</static>
+  </gazebo>
 
   <link name="servomg996r">
     <visual>
