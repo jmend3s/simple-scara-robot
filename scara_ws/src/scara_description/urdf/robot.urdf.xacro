@@ -11,11 +11,9 @@
   <xacro:property name="effort" value="30.0"/>
   <xacro:property name="velocity" value="10.0"/>
 
-  <link name="base_link"/>
+  <link name="world"/>
 
-  <gazebo reference="base_link">
-    <static>true</static>
-  </gazebo>
+  <link name="base_link"/>
 
   <link name="servomg996r">
     <visual>
@@ -110,6 +108,12 @@
   </link>
 
   <!-- Joints -->
+  <joint name="robot_in_world" type="fixed">
+    <origin xyz="0 0 0.0" rpy="0 0 0"/>
+    <parent link="world"/>
+    <child link="base_link"/>  <!-- or your robot's actual base link name -->
+  </joint>
+
   <joint name="base_to_servo" type="fixed">
     <origin xyz="0 0 0" rpy="0 0 0"/>
     <parent link="base_link"/>
