@@ -4,17 +4,9 @@
     <xacro:property name="PI" value="3.14159265359"/>
 
     <ros2_control type="system" name="RobotSystem">
-        <xacro:if value="$(arg is_ignition)">
-            <hardware>
-                <plugin>ign_ros2_control/IgnitionSystem</plugin>
-            </hardware>
-        </xacro:if>
-        <xacro:unless value="$(arg is_ignition)">
-            <hardware>
-                <plugin>gz_ros2_control/GazeboSimSystem</plugin>
-            </hardware>
-        </xacro:unless>
-
+        <hardware>
+            <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+        </hardware>
         <joint name="996_firstlink">
             <command_interface name="position">
                 <param name="min">-${PI / 2}</param>
@@ -39,7 +31,6 @@
             <state_interface name="position"/>
 <!--            <state_interface name="velocity"/>-->
         </joint>
-
     </ros2_control>
 
 </robot>

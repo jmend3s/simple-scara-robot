@@ -2,15 +2,9 @@
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="scara">
 
     <gazebo>
-        <xacro:if value="$(arg is_ignition)">
-            <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
-                <parameters>$(find scara_controller)/config/scara_controllers.yaml</parameters>
-            </plugin>
-        </xacro:if>
-        <xacro:unless value="$(arg is_ignition)">
-            <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
-                <parameters>$(find scara_controller)/config/scara_controllers.yaml</parameters>
-            </plugin>
-        </xacro:unless>
+        <plugin filename="gz_ros2_control-system" name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+            <parameters>$(find scara_controller)/config/scara_controllers.yaml</parameters>
+        </plugin>
     </gazebo>
+
 </robot>

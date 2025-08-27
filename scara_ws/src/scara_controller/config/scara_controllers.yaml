@@ -1,29 +1,26 @@
-controller_manger:
+controller_manager:
   ros__parameters:
     update_rate: 10
-    arm_controller:
-      type: joint_trajectory_controller/JointTrajectoryController
-
-    actuator_controller:
-#      type: joint_trajectory_controller/JointTrajectoryController
-      type: forward_command_controller/ForwardCommandController
 
     joint_state_broadcaster:
       type: joint_state_broadcaster/JointStateBroadcaster
 
+    arm_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    actuator_controller:
+      type: forward_command_controller/ForwardCommandController
+
+
 arm_controller:
   ros__parameters:
     joints:
-      - base_to_servo
       - 996_firstlink
       - Revolute_firsttosecondlink
-
     command_interfaces:
       - position
-
     state_interfaces:
       - position
-
     open_loop_control: true
     allow_integration_in_goal_trajectories: true
 
@@ -31,7 +28,6 @@ actuator_controller:
   ros__parameters:
     joints:
       - Slider_actuator
-
     interface_name: position
 
 #    command_interfaces:
