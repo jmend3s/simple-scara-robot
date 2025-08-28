@@ -7,7 +7,7 @@
         <hardware>
             <plugin>gz_ros2_control/GazeboSimSystem</plugin>
         </hardware>
-        <joint name="996_firstlink">
+        <joint name="joint1">
             <command_interface name="position">
                 <param name="min">-${PI / 2}</param>
                 <param name="max">${PI / 2}</param>
@@ -15,7 +15,7 @@
             <state_interface name="position"/>
         </joint>
 
-        <joint name="Revolute_firsttosecondlink">
+        <joint name="joint2">
             <command_interface name="position">
                 <param name="min">-${PI / 2}</param>
                 <param name="max">${PI / 2}</param>
@@ -23,7 +23,7 @@
             <state_interface name="position"/>
         </joint>
 
-        <joint name="Slider_actuator">
+        <joint name="slider_actuator">
             <command_interface name="position">
                 <param name="min">0.0</param>
                 <param name="max">0.1</param>

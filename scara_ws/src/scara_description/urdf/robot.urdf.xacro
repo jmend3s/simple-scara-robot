@@ -120,7 +120,7 @@
     <child link="servomg996r"/>
   </joint>
 
-  <joint name="996_firstlink" type="revolute">
+  <joint name="joint1" type="revolute">
     <origin xyz="0 0.01 0.0475" rpy="3.14159 0 0.109"/>
     <parent link="servomg996r"/>
     <child link="first_link"/>
@@ -128,7 +128,7 @@
     <limit lower="-3.14" upper="3.14" effort="1" velocity="20"/>
   </joint>
 
-  <joint name="Revolute_firsttosecondlink" type="revolute">
+  <joint name="joint2" type="revolute">
     <origin xyz="-0.0005 -0.0598 -0.056" rpy="0 0 0"/>
     <parent link="first_link"/>
     <child link="second_link"/>
@@ -136,7 +136,7 @@
     <limit lower="-3.14" upper="3.14" effort="1" velocity="20"/>
   </joint>
 
-  <joint name="Slider_actuator" type="prismatic">
+  <joint name="slider_actuator" type="prismatic">
     <origin xyz="0.0183 -0.0518 0.0186" rpy="3.14159 0 -1.5708"/>
     <parent link="second_link"/>
     <child link="actuator"/>

@@ -93,7 +93,7 @@
             <inertia ixx="0" ixy="0" ixz="0" iyy="0" iyz="0" izz="0"/>
         </inertial>
     </link>
-    <joint name="Slider_actuator" type="prismatic">
+    <joint name="slider_actuator" type="prismatic">
         <origin xyz="0.018325999999999991602 -0.051833589599999993491 0.018598077114628464024"
                 rpy="-3.141592653589793116 -5.1171304803077346007e-18 -1.5707963267948961139"/>
         <parent link="second_link"/>
@@ -102,7 +102,7 @@
         <limit effort="1" velocity="20"/>
         <joint_properties friction="0.0"/>
     </joint>
-    <joint name="Revolute_firsttosecondlink" type="revolute">
+    <joint name="joint2" type="revolute">
         <origin xyz="-0.00050000000000000304617 -0.059750000000000011435 -0.055999999999999987288"
                 rpy="1.7662033618514959478e-21 2.5217203946365817101e-22 -5.465863304373380401e-15"/>
         <parent link="first_link"/>
@@ -111,7 +111,7 @@
         <limit effort="1" velocity="20"/>
         <joint_properties friction="0.0"/>
     </joint>
-    <joint name="996_firstlink" type="revolute">
+    <joint name="joint1" type="revolute">
         <origin xyz="6.505213034913026604e-18 0.0099999999999999915345 0.047499999999999993616"
                 rpy="3.141592653589793116 2.4637214511932053286e-22 0.10904934252795142613"/>
         <parent link="servomg996r"/>
