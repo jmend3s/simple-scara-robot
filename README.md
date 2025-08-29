@@ -7,6 +7,7 @@ This is a project to use a simple scara robot for the following purposes:
 - Get a grasp of basic robotics concepts like motion planning
 - Implement and get familiar with using linear algebra concepts applied to robots:
   - Rotation matrices
+  - Translation vectors
  
 ## How?
 The first step was to design a simple scara robot using common components. This is intended to run as a simulation and after to test with real world constraints. <br>
