@@ -1,8 +1,8 @@
 
-#ifndef __SCARA_SIMPLES_ERVICE_SERVER_H__
-#define __SCARA_SIMPLES_ERVICE_SERVER_H__
+#ifndef __SCARA_SIMPLE_SERVICE_SERVER_H__
+#define __SCARA_SIMPLE_SERVICE_SERVER_H__
 
-// #include <scara_msgs/srv/AddTwoInts.srv>
+#include <scara_msgs/srv/add_two_ints.hpp>
 #include <rclcpp/rclcpp.hpp>
 #include <memory>
 
@@ -10,10 +10,13 @@
 class SimpleServiceServer : public rclcpp::Node
 {
 public:
-    SimpleServiceServer() : rclcpp::Node("simple_service_server") {};
+    SimpleServiceServer();
 
 private:
-    // rclcpp::Service<>::SharedPtr _service;
+    void service_callback(scara_msgs::srv::AddTwoInts::Request::SharedPtr const request,
+                             scara_msgs::srv::AddTwoInts::Response::SharedPtr const response);
+
+    rclcpp::Service<scara_msgs::srv::AddTwoInts>::SharedPtr _service;
 };
 
 #endif
