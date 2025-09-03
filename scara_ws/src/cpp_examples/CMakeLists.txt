@@ -9,10 +9,14 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(scara_msgs REQUIRED)
 
+add_executable(simple_client src/SimpleServiceClient.cpp)
+ament_target_dependencies(simple_client rclcpp scara_msgs)
+
 add_executable(simple_server src/SimpleServiceServer.cpp)
 ament_target_dependencies(simple_server rclcpp scara_msgs)
 
 install(TARGETS
+    simple_client
     simple_server
     DESTINATION lib/${PROJECT_NAME}
 )
