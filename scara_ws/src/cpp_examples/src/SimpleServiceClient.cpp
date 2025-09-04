@@ -8,7 +8,7 @@ SimpleServiceClient::SimpleServiceClient(int a, int b)
     : Node("simple_client")
 {
     _client = create_client<scara_msgs::srv::AddTwoInts>("add_two_ints");
-    auto const request = scara_msgs::srv::AddTwoInts::Request::SharedPtr();
+    auto const request = std::make_shared<scara_msgs::srv::AddTwoInts::Request>();
     request->a = a;
     request->b = b;
 
