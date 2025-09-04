@@ -8,6 +8,10 @@ This is a project to use a simple scara robot for the following purposes:
 - Implement and get familiar with using linear algebra concepts applied to robots:
   - Rotation matrices
   - Translation vectors
+  - Euler angles
+  - Quaternion representations
+- Develop a deeper understanding on how to use Clion to work on docker containers with ros2 images
+- Develop a deeper understanding on workflow of project idea > planning > drawing > CAD drawing > simulation > real robot
  
 ## How?
 The first step was to design a simple scara robot using common components. This is intended to run as a simulation and after to test with real world constraints. <br>
