@@ -11,3 +11,10 @@ arm_controller:
   joints:
     - joint1
     - joint2
+
+actuator_controller:
+  action_ns: follow_joint_trajectory
+  type: FollowJointTrajectory
+  default: True
+  joints:
+    - slider_actuator

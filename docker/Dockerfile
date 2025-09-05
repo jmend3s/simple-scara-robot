@@ -19,6 +19,8 @@ RUN apt-get update \
     ros-jazzy-urdf-tutorial \
     ros-jazzy-ros-gz \
     ros-jazzy-gz-ros2-control \
+    ros-jazzy-moveit \
+    ros-jazzy-rmw-cyclonedds-cpp \
   && rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user, ensuring no UID/GID conflicts
