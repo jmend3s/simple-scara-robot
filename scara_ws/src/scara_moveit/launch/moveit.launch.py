@@ -17,7 +17,7 @@ def generate_launch_description():
 
     is_sim = LaunchConfiguration("is_sim")
 
-    moveit_config = (MoveItConfigsBuilder("scara", package="scara_moveit")
+    moveit_config = (MoveItConfigsBuilder("scara", package_name="scara_moveit")
                     .robot_description(file_path=os.path.join(get_package_share_directory("scara_description"), "urdf", "robot.urdf.xacro"))
                     .robot_description_semantic(file_path="config/scara.srdf")
                     .trajectory_execution(file_path="config/moveit_controllers.yaml")
@@ -51,5 +51,3 @@ def generate_launch_description():
         move_group_node,
         rviz_node,
     ])
-
-    return LaunchDescription([])

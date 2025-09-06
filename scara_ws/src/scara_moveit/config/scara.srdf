@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <robot name="scara">
 
-    <group name="arm">
-        <joint name="virtual_joint"/>
+  <group name="arm">
+    <joint name="robot_in_world"/>
+    <joint name="base_to_servo"/>
+    <joint name="joint1"/>
+    <joint name="joint2"/>
+    <joint name="slider_actuator"/>
+  </group>
 
-        <joint name="joint1"/>
-        <joint name="joint2"/>
+  <group name="actuator">
+    <joint name="slider_actuator"/>
+  </group>
 
-        <joint name="horizontal_arm_to_actuator_support"/>
-    </group>
+  <group_state name="home" group="arm">
+    <joint name="joint1" value="0"/>
+    <joint name="joint2" value="0"/>
+    <joint name="slider_actuator" value="0"/>
+  </group_state>
 
-    <group name="actuator">
-        <joint name="slider_actuator"/>
-    </group>
+  <group_state name="home" group="actuator">
+    <joint name="slider_actuator" value="0"/>
+  </group_state>
 
-    <group_state name="home" group="arm">
-        <joint name="joint1" value="0"/>
-        <joint name="joint2" value="0"/>
-    </group_state>
+  <disable_collision link1="world" link2="base_link" reason="Adjacent"/>
+  <disable_collision link1="base_link" link2="servomg996r" reason="Adjacent"/>
 
-    <group_state name="home" group="actuator">
-        <joint name="slider_actuator" value="0"/>
-    </group_state>
-
-    <disable_colision link1="world" link2="base_link" reason="Adjacent"/>
-    <disable_colision link1="base_link" link2="servomg996r" reason="Adjacent"/>
 </robot>
