@@ -28,12 +28,13 @@ actuator_controller:
   ros__parameters:
     joints:
       - slider_actuator
-
     command_interfaces:
       - position
-
     state_interfaces:
       - position
-
     open_loop_control: true
     allow_integration_in_goal_trajectories: true
+    constraints:
+      goal:
+        slider_actuator: { tolerance: 1e-6 }
+      stopped_velocity_tolerance: 1e-6
