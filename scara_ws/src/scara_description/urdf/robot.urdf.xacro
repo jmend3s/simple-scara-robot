@@ -49,7 +49,7 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0 0.01 0.0475" rpy="3.14159 0 0"/>
+      <origin xyz="0 0.01 0.047" rpy="3.14159 0 0"/>
       <geometry>
         <mesh filename="package://scara_description/meshes/first_link.stl"/>
       </geometry>
@@ -72,7 +72,7 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="0.0005 0.07 0.1035" rpy="3.14159 0 0"/>
+      <origin xyz="0.0005 0.07 0.1025" rpy="3.14159 0 0"/>
       <geometry>
         <mesh filename="package://scara_description/meshes/second_link.stl"/>
       </geometry>
@@ -95,9 +95,9 @@
       </material>
     </visual>
     <collision>
-      <origin xyz="-0.1216 0.0178 -0.0916" rpy="0 0 -1.5708"/>
+      <origin xyz="0.0 -0.0178 0.04" rpy="0 0 -1.5708"/>
       <geometry>
-        <mesh filename="package://scara_description/meshes/actuator.stl"/>
+        <cylinder radius="0.005" length="0.12"/>
       </geometry>
     </collision>
     <inertial>
@@ -111,7 +111,7 @@
   <joint name="robot_in_world" type="fixed">
     <origin xyz="0 0 0.0" rpy="0 0 0"/>
     <parent link="world"/>
-    <child link="base_link"/>  <!-- or your robot's actual base link name -->
+    <child link="base_link"/>
   </joint>
 
   <joint name="base_to_servo" type="fixed">

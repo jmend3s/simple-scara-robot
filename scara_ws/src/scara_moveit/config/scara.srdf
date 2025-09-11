@@ -24,9 +24,29 @@
   </group_state>
 
   <disable_collision link1="world" link2="base_link" reason="Adjacent"/>
-  <disable_collision link1="base_link" link2="servomg996r" reason="Adjacent"/>
-  <disable_collision link1="first_link" link2="second_link" reason="Adjacent"/>
-  <disable_collision link1="actuator" link2="second_link" reason="Adjacent"/>
-  <disable_collision link1="first_link" link2="servomg996r" reason="Adjacent"/>
+  <disable_collision link1="base_link" link2="servomg996r" reason="Never"/>
+  <disable_collision link1="base_link" link2="first_link" reason="Never"/>
+  <disable_collision link1="base_link" link2="second_link" reason="Never"/>
+  <disable_collision link1="base_link" link2="actuator" reason="Never"/>
+
+  <disable_collision link1="servomg996r" link2="base_link" reason="Never"/>
+  <disable_collision link1="servomg996r" link2="first_link" reason="Never"/>
+  <disable_collision link1="servomg996r" link2="second_link" reason="Never"/>
+  <disable_collision link1="servomg996r" link2="actuator" reason="Never"/>
+
+  <disable_collision link1="first_link" link2="base_link" reason="Never"/>
+  <disable_collision link1="first_link" link2="servomg996r" reason="Never"/>
+  <disable_collision link1="first_link" link2="second_link" reason="Never"/>
+  <disable_collision link1="first_link" link2="actuator" reason="Never"/>
+
+  <disable_collision link1="second_link" link2="base_link" reason="Never"/>
+  <disable_collision link1="second_link" link2="servomg996r" reason="Never"/>
+  <disable_collision link1="second_link" link2="first_link" reason="Never"/>
+  <disable_collision link1="second_link" link2="actuator" reason="Never"/>
+
+  <disable_collision link1="actuator" link2="base_link" reason="Never"/>
+  <disable_collision link1="actuator" link2="servomg996r" reason="Never"/>
+  <disable_collision link1="actuator" link2="first_link" reason="Never"/>
+  <disable_collision link1="actuator" link2="second_link" reason="Never"/>
 
 </robot>
