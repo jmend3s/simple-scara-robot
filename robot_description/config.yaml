@@ -1,6 +1,0 @@
-{
-    document_id: 279454e002b82a1c88763d28,
-    assembly_name: robot,
-    output_format: urdf,
-    package_name: src/scara_description/meshes,
-}

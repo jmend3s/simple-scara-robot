@@ -1,4 +1,2 @@
 .idea
-scara_ws/build
-scara_ws/install
-scara_ws/log
+.pio
