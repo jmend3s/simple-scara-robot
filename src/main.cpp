@@ -1,21 +1,27 @@
-
 #include <Arduino.h>
-#include <ESP32Servo.h>
+#include <Servo.h>
 
+Servo myservo;  // create servo object to control a servo
+// a maximum of eight servo objects can be created
 
-Servo servo1;
+int pos = 0;    // variable to store the servo position
 
 void setup()
 {
-    servo1.attach(1);
+    myservo.attach(20);  // attaches the servo on pin 20
 }
 
 
-void loop() {
-    servo1.write(80);    // 0 degrees
-    delay(500);
-    servo1.write(90);   // middle
-    delay(500);
-    servo1.write(100);  // max
-    delay(500);
+void loop()
+{
+    for(pos = 10; pos < 170; pos += 1)  // goes from 10 degrees to 170 degrees
+    {                                  // in steps of 1 degree
+        myservo.write(pos);              // tell servo to go to position in variable 'pos'
+        delay(15);                       // waits 15ms for the servo to reach the position
+    }
+    for(pos = 180; pos>=1; pos-=1)     // goes from 180 degrees to 0 degrees
+    {
+        myservo.write(pos);              // tell servo to go to position in variable 'pos'
+        delay(15);                       // waits 15ms for the servo to reach the position
+    }
 }
