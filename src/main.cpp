@@ -1,19 +1,22 @@
+
 #include <Arduino.h>
 #include <ESP32Servo.h>
 
-Servo myservo;  // create servo object to control a servo
-// a maximum of eight servo objects can be created
 
-int pos = 0;    // variable to store the servo position
+Servo joint1;
+Servo joint2;
+Servo joint3;
 
 void setup()
 {
-    myservo.attach(1);  // attaches the servo on pin 20
+    joint1.attach(0);
+    joint2.attach(1);
+    joint3.attach(10);
 }
-
 
 void loop()
 {
-    myservo.write(90);              // tell servo to go to position in variable 'pos'
-
+    joint1.write(0);
+    joint2.write(180);
+    joint3.write(0);
 }
