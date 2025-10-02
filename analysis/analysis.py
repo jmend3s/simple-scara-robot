@@ -34,3 +34,6 @@ homogeneousMatrix1_2 = np.concatenate((homogeneousMatrix1_2, [[0, 0, 0, 1]]), ax
 homogeneousMatrix0_2 = np.dot(homogeneousMatrix0_1, homogeneousMatrix1_2)
 
 print(np.matrix(homogeneousMatrix0_2))
+
+# 15.8 h 16.7 v
+

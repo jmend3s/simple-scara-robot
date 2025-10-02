@@ -16,7 +16,7 @@ void setup()
 
 void loop()
 {
-    joint1.write(0);
-    joint2.write(180);
-    joint3.write(0);
+    joint1.write(95);
+    joint2.write(85);
+    joint3.write(82);
 }
