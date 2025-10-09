@@ -1,73 +1,80 @@
 
 #include <Arduino.h>
-#include <ESP32Servo.h>
 
+#define SERVO1_PIN 0      // GPIO 0 on the ESP32-C3 Super Mini Pro
+#define LEDC_CHANNEL_1 0   // Use LEDC Channel 0 (0-5 available on C3)
 
-Servo joint1;
-Servo joint2;
-Servo joint3;
+#define SERVO2_PIN 1      // GPIO 1
+#define LEDC_CHANNEL_2 1
+
+#define LEDC_TIMER 0     // Use LEDC Timer 0 (0-3 available on C3)
+#define PWM_FREQ 50      // Standard servo frequency is 50 Hz
+#define PWM_RESOLUTION 10 // 10 bits gives 1024 steps (0 to 1023)
+
+int const SERVO_DUTY_MIN = 25;  // Duty for 1000us (0 degrees)
+int const SERVO_DUTY_MAX = 130; // Duty for 2000us (180 degrees)
 
 void setup()
 {
-    joint1.attach(0);
-    joint2.attach(1);
-    joint3.attach(10);
     Serial.begin(460800);
-    while (!Serial) {}
+    Serial.println("Starting ESP32-C3 Servo Control (LEDC)");
+
+    ledcSetup(LEDC_CHANNEL_1, PWM_FREQ, PWM_RESOLUTION);
+    ledcSetup(LEDC_CHANNEL_2, PWM_FREQ, PWM_RESOLUTION);
+    ledcAttachPin(SERVO1_PIN, LEDC_CHANNEL_1);
+    ledcAttachPin(SERVO2_PIN, LEDC_CHANNEL_2);
+}
+
+void setServoAngle(int channel, int angle)
+{
+    int duty = map(angle, 0, 180, SERVO_DUTY_MIN, SERVO_DUTY_MAX);
+    ledcWrite(channel, duty);
 }
 
 void loop()
 {
-    int x = 4;
-    int y = 4;
+    float x = 0.0f;
+    float y = 5.0f;
 
-    float constexpr a2 = 5.975;
-    float constexpr a4 = 4.6975;
+    float xSqr = x * x;
+    float ySqr = y * y;
 
-    float const r1 = sqrt(x*x + y*y);
-    Serial.print("r1 = ");
-    Serial.println(r1);
+    float L1 = 6.0f;
+    float L2 = 4.7f;
 
-    float val1 = (a4*a4 - a2*a2 - r1*r1) / (-2.0f * a2 * r1);
-    if (val1 < -1.0f) val1 = -1.0f;
-    if (val1 >  1.0f) val1 =  1.0f;
-    float phi1 = acos(val1);
-    Serial.print("phi1 = ");
-    Serial.println(phi1);
+    float L1Sqr = L1 * L1;
+    float L2Sqr = L2 * L2;
 
-    float const phi2 = atan2(y, x);
-    Serial.print("phi2 = ");
-    Serial.println(phi2);
+    float beta = acos((L1Sqr + L2Sqr - xSqr - ySqr) / (2 * L1 * L2));
+    float alpha = acos((xSqr + ySqr + L1Sqr - L2Sqr) / (2 * L1 * sqrt(xSqr + ySqr)));
+    float phi = atan2(y, x);
 
-    float const theta1 = phi2 - phi1;
+    Serial.print("beta = ");
+    Serial.println(beta);
+    Serial.print("alpha = ");
+    Serial.println(alpha);
+    Serial.print("phi = ");
+    Serial.println(phi);
+
+    float theta1 = phi - alpha;
+    float theta2 = M_PI - beta;
+
     Serial.print("theta1 = ");
     Serial.println(theta1);
-
-    float val2 = (r1 * r1 - a2 * a2 - a4 * a4) / (-2 * (a2 * a4));
-    if (val2 < -1.0f) val2 = -1.0f;
-    if (val2 >  1.0f) val2 =  1.0f;
-    float const phi3 = acos(val2);
-    Serial.print("phi3 = ");
-    Serial.println(phi3);
-
-    float const theta2 = M_PI - phi3;
     Serial.print("theta2 = ");
     Serial.println(theta2);
 
-    float const pwm1 = theta1 * 180.0f / M_PI;
-    float const pwm2 = theta2 * 180.0f / M_PI;
-
-    int constexpr homePositionJoint1 = 95;
-    int constexpr homePositionJoint2 = 85;
+    int pwm1 = constrain(round(theta1 / M_PI * 180.0), 0, 180);
+    int pwm2 = constrain(round(theta2 / M_PI * 180.0), 0, 180);
 
     Serial.print("pwm1 = ");
     Serial.println(pwm1);
     Serial.print("pwm2 = ");
     Serial.println(pwm2);
-    Serial.println("----------------------------------------");
+    Serial.println("-----------------------------");
 
-    joint1.write(homePositionJoint1 + static_cast<int>(pwm1 - 90));
-    joint2.write(homePositionJoint2 + static_cast<int>(pwm2 - 90));
+    setServoAngle(LEDC_CHANNEL_1, pwm1);
+    setServoAngle(LEDC_CHANNEL_2, pwm2); // 83
 
-    joint3.write(60); // 82
+    delay(1000);
 }
