@@ -33,8 +33,8 @@ void setServoAngle(int channel, int angle)
 
 void loop()
 {
-    float x = 0.0f;
-    float y = 5.0f;
+    float x = 5.0f;
+    float y = 6.0f;
 
     float xSqr = x * x;
     float ySqr = y * y;
@@ -45,12 +45,18 @@ void loop()
     float L1Sqr = L1 * L1;
     float L2Sqr = L2 * L2;
 
-    float beta = acos((L1Sqr + L2Sqr - xSqr - ySqr) / (2 * L1 * L2));
-    float alpha = acos((xSqr + ySqr + L1Sqr - L2Sqr) / (2 * L1 * sqrt(xSqr + ySqr)));
+    float preBeta = (L1Sqr + L2Sqr - xSqr - ySqr) / (2 * L1 * L2);
+    float beta = acos(preBeta);
+    float preAlpha = (xSqr + ySqr + L1Sqr - L2Sqr) / (2 * L1 * sqrt(xSqr + ySqr));
+    float alpha = acos(preAlpha);
     float phi = atan2(y, x);
 
+    Serial.print("preBeta = ");
+    Serial.println(preBeta);
     Serial.print("beta = ");
     Serial.println(beta);
+    Serial.print("preAlpha = ");
+    Serial.println(preAlpha);
     Serial.print("alpha = ");
     Serial.println(alpha);
     Serial.print("phi = ");
@@ -73,8 +79,10 @@ void loop()
     Serial.println(pwm2);
     Serial.println("-----------------------------");
 
-    setServoAngle(LEDC_CHANNEL_1, pwm1);
-    setServoAngle(LEDC_CHANNEL_2, pwm2); // 83
+    setServoAngle(LEDC_CHANNEL_1, 90 - pwm1);
+    setServoAngle(LEDC_CHANNEL_2, 90 - pwm2); // 83
+    // setServoAngle(LEDC_CHANNEL_1,45);
+    // setServoAngle(LEDC_CHANNEL_2, 45); // 83
 
     delay(1000);
 }

@@ -2,8 +2,8 @@
 import numpy as np
 
 
-theta1 = 0
-theta2 = 0
+theta1 = 13
+theta2 = 87
 
 theta1 = (theta1 / 180) * np.pi
 theta2 = (theta2 / 180) * np.pi
