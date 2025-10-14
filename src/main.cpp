@@ -49,40 +49,16 @@ void loop()
     float beta = acos(preBeta);
     float preAlpha = (xSqr + ySqr + L1Sqr - L2Sqr) / (2 * L1 * sqrt(xSqr + ySqr));
     float alpha = acos(preAlpha);
-    float phi = atan2(y, x);
-
-    Serial.print("preBeta = ");
-    Serial.println(preBeta);
-    Serial.print("beta = ");
-    Serial.println(beta);
-    Serial.print("preAlpha = ");
-    Serial.println(preAlpha);
-    Serial.print("alpha = ");
-    Serial.println(alpha);
-    Serial.print("phi = ");
-    Serial.println(phi);
+    float phi = atan2(y, x);                                                                                                                         
 
     float theta1 = phi - alpha;
     float theta2 = M_PI - beta;
 
-    Serial.print("theta1 = ");
-    Serial.println(theta1);
-    Serial.print("theta2 = ");
-    Serial.println(theta2);
-
     int pwm1 = constrain(round(theta1 / M_PI * 180.0), 0, 180);
     int pwm2 = constrain(round(theta2 / M_PI * 180.0), 0, 180);
 
-    Serial.print("pwm1 = ");
-    Serial.println(pwm1);
-    Serial.print("pwm2 = ");
-    Serial.println(pwm2);
-    Serial.println("-----------------------------");
-
     setServoAngle(LEDC_CHANNEL_1, 90 - pwm1);
     setServoAngle(LEDC_CHANNEL_2, 90 - pwm2); // 83
-    // setServoAngle(LEDC_CHANNEL_1,45);
-    // setServoAngle(LEDC_CHANNEL_2, 45); // 83
 
     delay(1000);
 }
