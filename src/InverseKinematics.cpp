@@ -24,14 +24,14 @@ InverseKinematics::JointAngles InverseKinematics::calculateJointAngles(float con
 
     float const endEffectorAngle = atan2(L4, L2 + L3);
 
-    float const theta1 = phi - alpha;
-    float theta2 = M_PI - beta;
+    float const theta1 = phi + alpha;
+    float theta2 = beta - M_PI;
     theta2 = theta2 - endEffectorAngle;
 
-    int const pwm1 = constrain(round(theta1 / M_PI * 180.0), 0, 180);
-    int const pwm2 = constrain(round(theta2 / M_PI * 180.0), 0, 180);
+    int const pwm1 = constrain(round(theta1 / M_PI * 180.0), -90, 90);
+    int const pwm2 = constrain(round(theta2 / M_PI * 180.0), -90, 90);
 
     int constexpr realAngleOffset = 90;
 
-    return {realAngleOffset - pwm1, realAngleOffset - pwm2};
+    return { realAngleOffset - pwm1, realAngleOffset - pwm2 };
 }
