@@ -1,34 +1,22 @@
 
 #include <Arduino.h>
 
-#define SERVO1_PIN 0      // GPIO 0 on the ESP32-C3 Super Mini Pro
-#define LEDC_CHANNEL_1 0   // Use LEDC Channel 0 (0-5 available on C3)
+#include "Joint.h"
 
-#define SERVO2_PIN 1      // GPIO 1
-#define LEDC_CHANNEL_2 1
+uint8_t constexpr joint1Channel = 0;
+uint8_t constexpr joint1Pin = 0;
+Joint joint1(joint1Channel, joint1Pin);
 
-#define LEDC_TIMER 0     // Use LEDC Timer 0 (0-3 available on C3)
-#define PWM_FREQ 50      // Standard servo frequency is 50 Hz
-#define PWM_RESOLUTION 10 // 10 bits gives 1024 steps (0 to 1023)
-
-int const SERVO_DUTY_MIN = 25;  // Duty for 1000us (0 degrees)
-int const SERVO_DUTY_MAX = 130; // Duty for 2000us (180 degrees)
+uint8_t constexpr joint2Channel = 1;
+uint8_t constexpr joint2Pin = 1;
+Joint joint2(joint2Channel, joint2Pin);
 
 void setup()
 {
     Serial.begin(460800);
-    Serial.println("Starting ESP32-C3 Servo Control (LEDC)");
 
-    ledcSetup(LEDC_CHANNEL_1, PWM_FREQ, PWM_RESOLUTION);
-    ledcSetup(LEDC_CHANNEL_2, PWM_FREQ, PWM_RESOLUTION);
-    ledcAttachPin(SERVO1_PIN, LEDC_CHANNEL_1);
-    ledcAttachPin(SERVO2_PIN, LEDC_CHANNEL_2);
-}
-
-void setServoAngle(int channel, int angle)
-{
-    int duty = map(angle, 0, 180, SERVO_DUTY_MIN, SERVO_DUTY_MAX);
-    ledcWrite(channel, duty);
+    joint1.setup();
+    joint2.setup();
 }
 
 void loop()
@@ -62,8 +50,8 @@ void loop()
     int pwm1 = constrain(round(theta1 / M_PI * 180.0), 0, 180);
     int pwm2 = constrain(round(theta2 / M_PI * 180.0), 0, 180);
 
-    setServoAngle(LEDC_CHANNEL_1, 90 - pwm1);
-    setServoAngle(LEDC_CHANNEL_2, 90 - pwm2); // 83
+    joint1.setAngle(90 - pwm1);
+    joint2.setAngle(90 - pwm2); // 83
 
     delay(1000);
 }
