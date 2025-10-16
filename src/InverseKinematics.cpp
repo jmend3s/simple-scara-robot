@@ -18,20 +18,27 @@ InverseKinematics::JointAngles InverseKinematics::calculateJointAngles(float con
     float constexpr L1Sqr = L1 * L1;
     float constexpr L2Sqr = L2 * L2;
 
-    float const beta = acos((L1Sqr + L2Sqr - xSqr - ySqr) / (2 * L1 * L2));
-    float const alpha = acos((xSqr + ySqr + L1Sqr - L2Sqr) / (2 * L1 * sqrt(xSqr + ySqr)));
+    float cos_beta = (L1Sqr + L2Sqr - xSqr - ySqr) / (2 * L1 * L2);
+    float const beta = acos(cos_beta);
+    float cos_alpha = (xSqr + ySqr + L1Sqr - L2Sqr) / (2 * L1 * sqrt(xSqr + ySqr));
+    float const alpha = acos(cos_alpha);
     float const phi = atan2(y, x);
+
+    Serial.print("cos_beta = "); Serial.println(cos_beta);
+    Serial.print("cos_alpha = "); Serial.println(cos_alpha);
 
     float const endEffectorAngle = atan2(L4, L2 + L3);
 
-    float const theta1 = phi + alpha;
-    float theta2 = beta - M_PI;
+    float const theta1 = phi - alpha;
+    float theta2 = M_PI - beta;
     theta2 = theta2 - endEffectorAngle;
 
     int const pwm1 = constrain(round(theta1 / M_PI * 180.0), -90, 90);
     int const pwm2 = constrain(round(theta2 / M_PI * 180.0), -90, 90);
 
     int constexpr realAngleOffset = 90;
+    int const servo1 = realAngleOffset - pwm1;
+    int const servo2 = realAngleOffset + pwm2;
 
-    return { realAngleOffset - pwm1, realAngleOffset - pwm2 };
+    return { servo1, servo2 };
 }
